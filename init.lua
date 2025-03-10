@@ -23,6 +23,8 @@
 --]]
 
 require 'core.options'
+require 'core.keymaps'
+require 'core.autocmds'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
