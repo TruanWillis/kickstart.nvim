@@ -96,6 +96,7 @@ require('lazy').setup({
   require 'plugins.vim-tmux-navigator',
   require 'plugins.lsp',
   require 'plugins.todo',
+  require 'plugins.snacks',
 
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
