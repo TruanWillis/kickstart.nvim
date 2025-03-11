@@ -14,7 +14,7 @@ return {
     indent = { enabled = true },
     input = { enabled = false },
     picker = { enabled = false },
-    notifier = { enabled = false },
+    notifier = { enabled = true },
     quickfile = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = true },
@@ -68,5 +68,8 @@ return {
     vim.keymap.set('n', '<leader>gl', function()
       require('snacks').lazygit.log()
     end, { desc = 'Git Log (cwd)' }),
+    vim.keymap.set('n', '<leader>n', function()
+      require('snacks').notifier.show_history()
+    end, { desc = '[N]otification History' }),
   },
 }
