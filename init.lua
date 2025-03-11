@@ -26,7 +26,7 @@ require 'core.options'
 require 'core.keymaps'
 require 'core.autocmds'
 
--- Set <space> as the leader key
+-- Sset <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
@@ -97,7 +97,8 @@ require('lazy').setup({
   require 'plugins.lsp',
   require 'plugins.todo',
   require 'plugins.snacks',
-  -- require 'plugins.lualine',
+  require 'plugins.lualine',
+  require 'plugins.noice',
 
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
