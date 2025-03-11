@@ -64,10 +64,13 @@ return {
   keys = {
     vim.keymap.set('n', '<leader>gg', function()
       require('snacks').lazygit()
-    end, { desc = 'Lazygit (cwd)' }),
+    end, { desc = 'Lazygit' }),
     vim.keymap.set('n', '<leader>gl', function()
+      require('snacks').lazygit.log_file()
+    end, { desc = 'Git Log (file)' }),
+    vim.keymap.set('n', '<leader>gL', function()
       require('snacks').lazygit.log()
-    end, { desc = 'Git Log (cwd)' }),
+    end, { desc = 'Git Log' }),
     vim.keymap.set('n', '<leader>n', function()
       require('snacks').notifier.show_history()
     end, { desc = '[N]otification History' }),
