@@ -11,7 +11,7 @@ return {
     lazygit = { enabled = true },
     dashboard = { enabled = false },
     explorer = { enabled = false },
-    indent = { enabled = false },
+    indent = { enabled = true },
     input = { enabled = false },
     picker = { enabled = false },
     notifier = { enabled = false },
