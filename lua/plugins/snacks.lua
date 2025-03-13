@@ -13,7 +13,7 @@ return {
     explorer = { enabled = false },
     indent = { enabled = true },
     input = { enabled = false },
-    picker = { enabled = false },
+    picker = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = false },
     scope = { enabled = false },
@@ -74,5 +74,24 @@ return {
     vim.keymap.set('n', '<leader>n', function()
       require('snacks').notifier.show_history()
     end, { desc = '[N]otification History' }),
+    -- find
+    vim.keymap.set('n', '<leader>pb', function()
+      Snacks.picker.buffers()
+    end, { desc = 'Buffers' }),
+    -- vim.keymap.set('n', '<leader>fc', function()
+    --   Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
+    -- end, { desc = 'Find Config File' }),
+    vim.keymap.set('n', '<leader>pf', function()
+      Snacks.picker.files()
+    end, { desc = 'Find Files' }),
+    vim.keymap.set('n', '<leader>pg', function()
+      Snacks.picker.git_files()
+    end, { desc = 'Find Git Files' }),
+    vim.keymap.set('n', '<leader>pp', function()
+      Snacks.picker.projects()
+    end, { desc = 'Projects' }),
+    vim.keymap.set('n', '<leader>pr', function()
+      Snacks.picker.recent()
+    end, { desc = 'Recent' }),
   },
 }

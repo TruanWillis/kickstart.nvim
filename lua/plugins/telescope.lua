@@ -67,17 +67,25 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
-    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
-    vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[Find] by [G]rep' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
-    vim.keymap.set('n', '<leader>fc', builtin.command_history, { desc = '[F]ind [C]omand History' })
-    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
-    vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+    -- In this case, we create a function that lets us more easily define mappings specific
+    -- for LSP related items. It sets the mode, buffer and description for us each time.
+    local map = function(keys, func, desc, mode)
+      mode = mode or 'n'
+      vim.keymap.set(mode, keys, func, { desc = desc })
+    end
+
+    map('<leader>fh', builtin.help_tags, '[F]ind [H]elp')
+    map('<leader>fk', builtin.keymaps, '[F]ind [K]eymaps')
+    map('<leader>ff', builtin.find_files, '[F]ind [F]iles')
+    map('<leader>fs', builtin.builtin, '[F]ind [S]elect Telescope')
+    map('<leader>fw', builtin.grep_string, '[F]ind current [W]ord')
+    map('<leader>fg', builtin.live_grep, '[Find] by [G]rep')
+    map('<leader>fd', builtin.diagnostics, '[F]ind [D]iagnostics')
+    map('<leader>fc', builtin.command_history, '[F]ind [C]omand History')
+    map('<leader>fr', builtin.resume, '[F]ind [R]esume')
+    map('<leader>f.', builtin.oldfiles, '[F]ind Recent Files ("." for repeat)')
+    map('<leader><leader>', builtin.buffers, '[ ] Find existing buffers')
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
