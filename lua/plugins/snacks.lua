@@ -13,7 +13,7 @@ return {
     explorer = { enabled = false },
     indent = { enabled = true },
     input = { enabled = false },
-    picker = { enabled = true },
+    picker = { enabled = false },
     notifier = { enabled = true },
     quickfile = { enabled = false },
     scope = { enabled = false },
@@ -75,23 +75,29 @@ return {
       require('snacks').notifier.show_history()
     end, { desc = '[N]otification History' }),
     -- find
-    vim.keymap.set('n', '<leader>pb', function()
-      Snacks.picker.buffers()
-    end, { desc = 'Buffers' }),
+    -- vim.keymap.set('n', '<leader>pb', function()
+    --   Snacks.picker.buffers()
+    -- end, { desc = 'Buffers' }),
     -- vim.keymap.set('n', '<leader>fc', function()
     --   Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
     -- end, { desc = 'Find Config File' }),
-    vim.keymap.set('n', '<leader>pf', function()
-      Snacks.picker.files()
-    end, { desc = 'Find Files' }),
-    vim.keymap.set('n', '<leader>pg', function()
-      Snacks.picker.git_files()
-    end, { desc = 'Find Git Files' }),
-    vim.keymap.set('n', '<leader>pp', function()
-      Snacks.picker.projects()
-    end, { desc = 'Projects' }),
-    vim.keymap.set('n', '<leader>pr', function()
-      Snacks.picker.recent()
-    end, { desc = 'Recent' }),
+    -- vim.keymap.set('n', '<leader>pf', function()
+    --   Snacks.picker.files()
+    -- end, { desc = 'Find Files' }),
+    -- vim.keymap.set('n', '<leader>pg', function()
+    --   Snacks.picker.git_files()
+    -- end, { desc = 'Find Git Files' }),
+    -- vim.keymap.set('n', '<leader>pp', function()
+    --   Snacks.picker.projects()
+    -- end, { desc = 'Projects' }),
+    -- vim.keymap.set('n', '<leader>pr', function()
+    --   Snacks.picker.recent()
+    -- end, { desc = 'Recent' }),
+    -- vim.keymap.set('n', 'gD', function()
+    --   Snacks.picker.lsp_definitions()
+    -- end, { desc = 'Goto Definition' }),
+    -- vim.keymap.set('n', '<leader>sb', function()
+    --   Snacks.picker.lines()
+    -- end, { desc = 'Buffer Lines' }),
   },
 }
