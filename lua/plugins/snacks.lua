@@ -20,6 +20,7 @@ return {
     scroll = { enabled = true },
     statuscolumn = { enabled = false },
     words = { enabled = false },
+    toggle = { enabled = true },
   },
   keys = {
     -- Top Pickers & Explorer
@@ -38,7 +39,7 @@ return {
     -- find
     -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     {
-      '<leader>space',
+      '<leader><leader>',
       function()
         Snacks.picker.buffers()
       end,
