@@ -72,7 +72,7 @@ require('lazy').setup({
 
   require 'plugins.colorscheme',
   require 'plugins.whichkey',
-  require 'plugins.telescope',
+  -- require 'plugins.telescope',
   require 'plugins.autoformat',
   require 'plugins.autocomplete',
   require 'plugins.mini',
