@@ -35,7 +35,9 @@ return { -- Autocompletion
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'onsails/lspkind.nvim',
+    'hrsh7th/cmp-cmdline',
   },
+
   config = function()
     -- See `:help cmp`
     local cmp = require 'cmp'
@@ -136,6 +138,22 @@ return { -- Autocompletion
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
+
+      -- Command line autocomplete
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+            },
+          },
+        }),
+      }),
+
       sources = {
         {
           name = 'lazydev',
