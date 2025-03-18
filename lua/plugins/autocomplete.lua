@@ -53,9 +53,9 @@ return { -- Autocompletion
         --   max_height = 10,
         -- },
         completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
-      documentation = false,
+      -- documentation = false,
 
       -- lspkind formatting
       formatting = {
