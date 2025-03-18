@@ -30,11 +30,11 @@ return {
     -- { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
     {
-      '<leader>e',
+      '<leader>E',
       function()
         Snacks.explorer()
       end,
-      desc = 'File Explorer',
+      desc = 'File Explorer [Snacks]',
     },
     -- find
     -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },

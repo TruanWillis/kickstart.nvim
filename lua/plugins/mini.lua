@@ -41,6 +41,6 @@ return { -- Collection of various small independent plugins/modules
   keymaps = {
     vim.keymap.set('n', '<leader>e', function()
       MiniFiles.open()
-    end, { desc = 'File [E]xploer' }),
+    end, { desc = 'File Exploer [Mini]' }),
   },
 }
