@@ -60,3 +60,18 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Confirm save changes beofre closing
+vim.opt.confirm = true
+
+-- Use spaces instead of tabs
+vim.opt.expandtab = true
+
+-- Poppup blend
+vim.opt.pumblend = 10
+
+-- Popup number of entries
+vim.opt.pumheight = 10
+
+-- Spelling
+vim.opt.spelllang = { 'en' }
