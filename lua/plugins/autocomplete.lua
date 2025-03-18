@@ -48,7 +48,9 @@ return { -- Autocompletion
     cmp.setup {
       window = {
         -- completion = {
+        --   border = 'rounded',
         --   scrollbar = true,
+        --   max_height = 10,
         -- },
         completion = cmp.config.window.bordered(),
         -- documentation = cmp.config.window.bordered(),
@@ -57,6 +59,7 @@ return { -- Autocompletion
 
       -- lspkind formatting
       formatting = {
+        fields = { 'abbr', 'kind' },
         format = lspkind.cmp_format {
           mode = 'symbol', -- show only symbol annotations
           maxwidth = {
