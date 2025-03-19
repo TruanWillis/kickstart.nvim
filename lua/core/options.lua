@@ -74,4 +74,8 @@ vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 
 -- Spelling
-vim.opt.spelllang = { 'en' }
+vim.opt.spelllang = { 'en_gb' }
+vim.opt.spell = true
+
+-- Scroll to centre
+vim.opt.scrolloff = 999
