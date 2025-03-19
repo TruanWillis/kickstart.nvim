@@ -90,13 +90,13 @@ return {
       end,
       desc = 'Git Log',
     },
-    {
-      '<leader>gL',
-      function()
-        Snacks.picker.git_log_line()
-      end,
-      desc = 'Git Log Line',
-    },
+    -- {
+    --   '<leader>gL',
+    --   function()
+    --     Snacks.picker.git_log_line()
+    --   end,
+    --   desc = 'Git Log Line',
+    -- },
     -- { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
     -- { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
     -- { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
@@ -204,13 +204,13 @@ return {
     -- { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
     -- { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
     -- { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
-    {
-      '<leader>sp',
-      function()
-        Snacks.picker.lazy()
-      end,
-      desc = 'Search for Plugin Spec',
-    },
+    -- {
+    --   '<leader>sp',
+    --   function()
+    --     Snacks.picker.lazy()
+    --   end,
+    --   desc = 'Search for Plugin Spec',
+    -- },
     {
       '<leader>sq',
       function()
@@ -218,13 +218,13 @@ return {
       end,
       desc = 'Quickfix List',
     },
-    {
-      '<leader>sR',
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = 'Resume',
-    },
+    -- {
+    --   '<leader>sR',
+    --   function()
+    --     Snacks.picker.resume()
+    --   end,
+    --   desc = 'Resume',
+    -- },
     {
       '<leader>su',
       function()
