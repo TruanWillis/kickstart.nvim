@@ -79,3 +79,6 @@ vim.opt.spell = true
 
 -- Scroll to centre
 vim.opt.scrolloff = 999
+
+-- Line length column
+vim.opt.colorcolumn = "88"
