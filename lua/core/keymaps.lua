@@ -8,7 +8,7 @@ local map = vim.keymap.set
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostic quickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -34,8 +34,11 @@ map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- buffers
-map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
-map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+--map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
+--map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous Buffer' })
+map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete Buffer' })
 
 -- better indenting
 map('v', '<', '<gv')
