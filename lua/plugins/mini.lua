@@ -1,5 +1,7 @@
-return { -- Collection of various small independent plugins/modules
+return {
   'echasnovski/mini.nvim',
+  version = '*', -- optional, locks to stable API
+  event = { 'VeryLazy' }, -- defer loading until after UI startup
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -8,7 +10,6 @@ return { -- Collection of various small independent plugins/modules
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
-
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --
     -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -23,37 +24,21 @@ return { -- Collection of various small independent plugins/modules
         highlight = 'sh', -- Highlight surrounding
         replace = 'sr', -- Replace surrounding
         update_n_lines = 'sn', -- Update `n_lines`
-
         suffix_last = 'l', -- Suffix to search with "prev" method
         suffix_next = 'n', -- Suffix to search with "next" method
       },
     }
-
-    -- -- Simple and easy statusline.
-    -- --  You could remove this setup call if you don't like it,
-    -- --  and try some other statusline plugin
-    -- local statusline = require 'mini.statusline'
-    -- -- set use_icons to true if you have a Nerd Font
-    -- statusline.setup { use_icons = vim.g.have_nerd_font }
-    --
-    -- -- You can configure sections in the statusline by overriding their
-    -- -- default behavior. For example, here we set the section for
-    -- -- cursor location to LINE:COLUMN
-    -- ---@diagnostic disable-next-line: duplicate-set-field
-    -- statusline.section_location = function()
-    --   return '%2l:%-2v'
-    -- end
-
-    require('mini.files').setup()
     require('mini.move').setup()
     require('mini.pairs').setup()
-
-    -- ... and there is more!
-    --  Check out: https://github.com/echasnovski/mini.nvim
+    -- don't init mini.files here (we’ll load it with keys below)
   end,
-  keymaps = {
-    vim.keymap.set('n', '<leader>e', function()
-      MiniFiles.open()
-    end, { desc = 'File Exploer [Mini]' }),
+
+  keys = {
+    {
+      '<leader>e',
+      function() require('mini.files').open() end,
+      desc = 'File Explorer [Mini]',
+    },
   },
 }
+
