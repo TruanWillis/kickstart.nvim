@@ -17,19 +17,32 @@ return {
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup {
       mappings = {
-        add = 'sa', -- Add surrounding in Normal and Visual modes
-        delete = 'sd', -- Delete surrounding
-        find = 'sf', -- Find surrounding (to the right)
-        find_left = 'sF', -- Find surrounding (to the left)
-        highlight = 'sh', -- Highlight surrounding
-        replace = 'sr', -- Replace surrounding
-        update_n_lines = 'sn', -- Update `n_lines`
+        add = 'msa', -- Add surrounding in Normal and Visual modes
+        delete = 'msd', -- Delete surrounding
+        find = 'msf', -- Find surrounding (to the right)
+        find_left = 'msF', -- Find surrounding (to the left)
+        highlight = 'msh', -- Highlight surrounding
+        replace = 'msr', -- Replace surrounding
+        update_n_lines = 'msn', -- Update `n_lines`
         suffix_last = 'l', -- Suffix to search with "prev" method
         suffix_next = 'n', -- Suffix to search with "next" method
       },
     }
     require('mini.move').setup()
     require('mini.pairs').setup()
+
+    -- Register with which-key
+    local wk = require('which-key')
+    wk.add({
+      { "ms", group = "Mini surround" },
+      { "msa", desc = "Add surrounding", mode = { "n", "v" } },
+      { "msd", desc = "Delete surrounding" },
+      { "msf", desc = "Find surrounding (right)" },
+      { "msF", desc = "Find surrounding (left)" },
+      { "msh", desc = "Highlight surrounding" },
+      { "msr", desc = "Replace surrounding" },
+      { "msn", desc = "Update n_lines" },
+    })
     -- don't init mini.files here (we’ll load it with keys below)
   end,
 
