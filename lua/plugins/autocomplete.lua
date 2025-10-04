@@ -79,6 +79,8 @@ return {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          -- getcwd doesn't seem to resolve issues with autocompleting paths
+          -- path = { opts = { get_cwd = function (_) return vim.fn.getcwd() end, }, },
         },
       },
 
