@@ -73,6 +73,19 @@ return {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        menu = {
+                border     = 'rounded',   -- rounded border like nvim-cmp
+                scrollbar  = true,        -- enable scrollbar when needed
+                max_height = 6,           -- limit menu height to 6 lines
+
+                draw = {
+                        -- only icon (kind_icon) and completion text (label)
+                        columns = {
+                                { 'kind_icon', 'label', gap = 1 },
+                        },
+                },
+        },
+
       },
 
       sources = {
