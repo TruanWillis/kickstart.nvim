@@ -34,7 +34,7 @@ return {
 
     -- Git
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+    -- { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
     { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
@@ -42,7 +42,7 @@ return {
 
     -- Search
     { "<leader>/",  function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-    { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep Project" },
+    { "<leader>sp", function() Snacks.picker.grep() end, desc = "Grep Project" },
     { "<leader>sb", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
     { "<leader>sw", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "Grep Word / Selection" },
     { "<leader>so", function() Snacks.picker.lsp_symbols() end, desc = "Outline (buffer symbols)" },
