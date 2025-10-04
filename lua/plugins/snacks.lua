@@ -12,10 +12,18 @@ return {
     notifier = { enabled = true },
     quickfile = { enabled = false },
     scope = { enabled = false },
-    scroll = { enabled = true },
+    -- scroll = { enabled = true },
     statuscolumn = { enabled = false },
     words = { enabled = false },
     toggle = { enabled = true },
+    scroll = {
+      filter = function(buf)
+        return vim.g.snacks_scroll ~= false
+        and vim.b[buf].snacks_scroll ~= false
+        and vim.bo[buf].buftype ~= "terminal"
+        and vim.bo[buf].filetype ~= "blink-cmp-menu"
+      end,
+    },
   },
   keys = {
     -- Files & Buffers
