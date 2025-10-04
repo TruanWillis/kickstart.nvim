@@ -2,6 +2,9 @@ return { -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-textobjects', -- Add textobjects plugin
+  },
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
     ensure_installed = { 'python', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
@@ -15,6 +18,58 @@ return { -- Highlight, edit, and navigate code
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = { enable = true, disable = { 'ruby' } },
+    
+    -- Configure treesitter textobjects
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+          ['aa'] = '@parameter.outer',
+          ['ia'] = '@parameter.inner',
+          ['al'] = '@loop.outer',
+          ['il'] = '@loop.inner',
+        },
+        -- Optionally, you can define your own textobjects like this
+        -- ['iF'] = {
+        --   python = '(function_definition) @function',
+        --   cpp = '(function_definition) @function',
+        --   c = '(function_definition) @function',
+        --   java = '(method_declaration) @function',
+        -- },
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          [']f'] = '@function.outer',
+          [']c'] = '@class.outer',
+          [']l'] = '@loop.outer',
+          [']s'] = { query = '@local.scope', query_group = 'locals', desc = 'Next scope' },
+        },
+        goto_next_end = {
+          [']F'] = '@function.outer',
+          [']C'] = '@class.outer',
+          [']L'] = '@loop.outer',
+        },
+        goto_previous_start = {
+          ['[f'] = '@function.outer',
+          ['[c'] = '@class.outer',
+          ['[l'] = '@loop.outer',
+          ['[s'] = { query = '@local.scope', query_group = 'locals', desc = 'Previous scope' },
+        },
+        goto_previous_end = {
+          ['[F'] = '@function.outer',
+          ['[C'] = '@class.outer',
+          ['[L'] = '@loop.outer',
+        },
+      },
+    },
   },
   -- There are additional nvim-treesitter modules that you can use to interact
   -- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -23,3 +78,4 @@ return { -- Highlight, edit, and navigate code
   --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
   --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 }
+
