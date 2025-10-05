@@ -82,3 +82,5 @@ vim.opt.scrolloff = 999
 
 -- Line length column
 vim.opt.colorcolumn = "88"
+
+vim.opt.winborder = "rounded"

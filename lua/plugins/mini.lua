@@ -1,59 +1,57 @@
-return { -- Collection of various small independent plugins/modules
+return {
   'echasnovski/mini.nvim',
+  version = '*', -- optional, locks to stable API
+  event = { 'VeryLazy' }, -- defer loading until after UI startup
   config = function()
     -- Better Around/Inside textobjects
     --
     -- Examples:
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-    --  - ci'  - [C]hange [I]nside [']quote
-    require('mini.ai').setup { n_lines = 500 }
 
+    require('mini.ai').setup { n_lines = 500 }
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --
     -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
-    require('mini.surround').setup {
-      mappings = {
-        add = 'sa', -- Add surrounding in Normal and Visual modes
-        delete = 'sd', -- Delete surrounding
-        find = 'sf', -- Find surrounding (to the right)
-        find_left = 'sF', -- Find surrounding (to the left)
-        highlight = 'sh', -- Highlight surrounding
-        replace = 'sr', -- Replace surrounding
-        update_n_lines = 'sn', -- Update `n_lines`
-
-        suffix_last = 'l', -- Suffix to search with "prev" method
-        suffix_next = 'n', -- Suffix to search with "next" method
-      },
-    }
-
-    -- -- Simple and easy statusline.
-    -- --  You could remove this setup call if you don't like it,
-    -- --  and try some other statusline plugin
-    -- local statusline = require 'mini.statusline'
-    -- -- set use_icons to true if you have a Nerd Font
-    -- statusline.setup { use_icons = vim.g.have_nerd_font }
-    --
-    -- -- You can configure sections in the statusline by overriding their
-    -- -- default behavior. For example, here we set the section for
-    -- -- cursor location to LINE:COLUMN
-    -- ---@diagnostic disable-next-line: duplicate-set-field
-    -- statusline.section_location = function()
-    --   return '%2l:%-2v'
-    -- end
-
-    require('mini.files').setup()
+    -- require('mini.surround').setup {
+    --   mappings = {
+    --     add = 'msa', -- Add surrounding in Normal and Visual modes
+    --     delete = 'msd', -- Delete surrounding
+    --     find = 'msf', -- Find surrounding (to the right)
+    --     find_left = 'msF', -- Find surrounding (to the left)
+    --     highlight = 'msh', -- Highlight surrounding
+    --     replace = 'msr', -- Replace surrounding
+    --     update_n_lines = 'msn', -- Update `n_lines`
+    --     suffix_last = 'l', -- Suffix to search with "prev" method
+    --     suffix_next = 'n', -- Suffix to search with "next" method
+    --   },
+    -- }
     require('mini.move').setup()
     require('mini.pairs').setup()
 
-    -- ... and there is more!
-    --  Check out: https://github.com/echasnovski/mini.nvim
+    -- Register with which-key
+    local wk = require('which-key')
+    wk.add({
+      { "ms", group = "Mini surround" },
+      { "msa", desc = "Add surrounding", mode = { "n", "v" } },
+      { "msd", desc = "Delete surrounding" },
+      { "msf", desc = "Find surrounding (right)" },
+      { "msF", desc = "Find surrounding (left)" },
+      { "msh", desc = "Highlight surrounding" },
+      { "msr", desc = "Replace surrounding" },
+      { "msn", desc = "Update n_lines" },
+    })
+    -- don't init mini.files here (we’ll load it with keys below)
   end,
-  keymaps = {
-    vim.keymap.set('n', '<leader>e', function()
-      MiniFiles.open()
-    end, { desc = 'File Exploer [Mini]' }),
-  },
+
+  -- keys = {
+  --   {
+  --     '<leader>e',
+  --     function() require('mini.files').open() end,
+  --     desc = 'File Explorer [Mini]',
+  --   },
+  -- },
 }
+

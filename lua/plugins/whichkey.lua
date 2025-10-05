@@ -2,6 +2,7 @@ return { -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
   opts = {
+    show_unmapped = false,   -- don’t show placeholders for missing mappings
     preset = 'helix',
     -- delay between pressing a key and opening which-key (milliseconds)
     -- this setting is independent of vim.opt.timeoutlen
@@ -45,6 +46,7 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- Document existing key chains
     spec = {
+      { '<leader>b', group = 'Buffer' },
       { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
       { '<leader>d', group = 'Document' },
       { '<leader>r', group = 'Rename' },
@@ -53,7 +55,7 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>w', group = 'Workspace' },
       { '<leader>t', group = 'Toggle' },
       { '<leader>g', group = 'Git' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      { '<leader>h', group = 'Git hunk', mode = { 'n', 'v' } },
     },
   },
 }
