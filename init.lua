@@ -73,7 +73,6 @@ require('lazy').setup({
 
   require 'plugins.colorscheme',
   require 'plugins.whichkey',
-  -- require 'plugins.telescope',
   require 'plugins.autoformat',
   require 'plugins.autocomplete',
   require 'plugins.mini',
@@ -86,7 +85,6 @@ require('lazy').setup({
   require 'plugins.noice',
   require 'plugins.gitsigns',
   require 'plugins.flash',
-  -- require 'plugins.outline',
   require 'plugins.markdown'
 
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
