@@ -43,10 +43,10 @@ return {
     -- Search
     { "<leader>/",  function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sp", function() Snacks.picker.grep() end, desc = "Grep Project" },
-    { "<leader>sb", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-    { "<leader>sw", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "Grep Word / Selection" },
-    { "<leader>so", function() Snacks.picker.lsp_symbols() end, desc = "Buffer Symbols)" },
-    { "<leader>sO", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Workspace Symbols)" },
+    { "<leader>sb", function() Snacks.picker.grep_buffers() end, desc = "Grep Buffers" },
+    { "<leader>sw", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "Grep Word" },
+    { "<leader>so", function() Snacks.picker.lsp_symbols() end, desc = "Buffer Symbols" },
+    { "<leader>sO", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Workspace Symbols" },
 
     -- Diagnostics & Misc
     { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },

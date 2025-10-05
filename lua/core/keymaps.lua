@@ -34,11 +34,16 @@ map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- buffers
---map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
---map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
-map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
-map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous Buffer' })
+map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
+map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+-- map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+-- map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous Buffer' })
 map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete Buffer' })
+
+-- Essential missing mappings
+map('n', '<leader>w', '<cmd>w<cr>', { desc = 'Save File' })
+map('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit Window' })
+map('n', '<leader>Q', '<cmd>q!<cr>', { desc = 'Force Quit' })
 
 -- better indenting
 map('v', '<', '<gv')
