@@ -28,10 +28,14 @@ map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+map('n', '<leader>wh', '<C-w>h', { desc = 'Move focus to the left window' })
+map('n', '<leader>wj', '<C-w>j',{ desc = 'Move focus to the left window' })
+map('n', '<leader>wk', '<C-w>k',{ desc = 'Move focus to the left window' })
+map('n', '<leader>wl', '<C-w>l',{ desc = 'Move focus to the left window' })
 
 -- buffers
 map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
