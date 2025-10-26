@@ -18,7 +18,16 @@ return { -- Highlight, edit, and navigate code
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = { enable = true, disable = { 'ruby' } },
-    
+    -- Incremental selection
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<C-space>",
+        node_incremental = "<C-space>",
+        scope_incremental = false,
+        node_decremental = "<bs>",
+      },
+    },
     -- Configure treesitter textobjects
     textobjects = {
       select = {
@@ -26,14 +35,24 @@ return { -- Highlight, edit, and navigate code
         lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
+          -- Functions
           ['af'] = '@function.outer',
           ['if'] = '@function.inner',
+          -- Classes
           ['ac'] = '@class.outer',
           ['ic'] = '@class.inner',
+          -- Parameters/arguments
           ['aa'] = '@parameter.outer',
           ['ia'] = '@parameter.inner',
+          -- Conditionals
+          ["ai"] = "@conditional.outer",
+          ["ii"] = "@conditional.inner",
+          -- Loops
           ['al'] = '@loop.outer',
           ['il'] = '@loop.inner',
+          -- Blocks
+          ["ab"] = "@block.outer",
+          ["ib"] = "@block.inner",
         },
         -- Optionally, you can define your own textobjects like this
         -- ['iF'] = {
@@ -50,6 +69,8 @@ return { -- Highlight, edit, and navigate code
           [']f'] = '@function.outer',
           [']c'] = '@class.outer',
           [']l'] = '@loop.outer',
+          ["]a"] = "@parameter.inner",
+          ["]i"] = "@conditional.inner",
           [']s'] = { query = '@local.scope', query_group = 'locals', desc = 'Next scope' },
         },
         goto_next_end = {
@@ -61,12 +82,26 @@ return { -- Highlight, edit, and navigate code
           ['[f'] = '@function.outer',
           ['[c'] = '@class.outer',
           ['[l'] = '@loop.outer',
+          ["[a"] = "@parameter.outer",
+          ["[i"] = "@conditional.outer",
           ['[s'] = { query = '@local.scope', query_group = 'locals', desc = 'Previous scope' },
         },
         goto_previous_end = {
           ['[F'] = '@function.outer',
           ['[C'] = '@class.outer',
           ['[L'] = '@loop.outer',
+        },
+      },
+      -- Swap adjacent objects
+      swap = {
+        enable = true,
+        swap_next = {
+          ["<leader>na"] = "@parameter.inner",  -- swap with next parameter
+          ["<leader>nf"] = "@function.outer",   -- swap with next function
+        },
+        swap_previous = {
+          ["<leader>pa"] = "@parameter.inner",  -- swap with previous parameter
+          ["<leader>pf"] = "@function.outer",   -- swap with previous function
         },
       },
     },
