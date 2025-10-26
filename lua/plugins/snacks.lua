@@ -4,14 +4,15 @@ return {
   lazy = false,
   opts = {
     bigfile = { enabled = true },
-    lazygit = { enabled = true },
-    dashboard = { enabled = true },
+    lazygit = { enabled = false },
+    dashboard = { enabled = false },
     explorer = { enabled = false },
     indent = { enabled = true },
     picker = { enabled = true },
     notifier = { enabled = true },
-    quickfile = { enabled = false },
+    quickfile = { enabled = true },
     scope = { enabled = false },
+    scratch = { enabled = true },
     statuscolumn = { enabled = false },
     words = { enabled = false },
     toggle = { enabled = true },
@@ -34,7 +35,7 @@ return {
     { "<leader>fr",       function() Snacks.picker.recent() end, desc = "Recent Files" },
 
     -- Git
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+    -- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
     { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff" },
@@ -55,6 +56,10 @@ return {
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>sn", function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+
+    -- Scratch
+    { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+    { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
   },
 }
 
