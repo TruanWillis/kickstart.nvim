@@ -1,6 +1,8 @@
 return { -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
+  event = "BufReadPre",
   build = ':TSUpdate',
+  cmd = "TSUpdate",
   main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects', -- Add textobjects plugin
