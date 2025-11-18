@@ -85,7 +85,8 @@ require('lazy').setup({
   require 'plugins.noice',
   require 'plugins.gitsigns',
   require 'plugins.flash',
-  require 'plugins.markdown'
+  require 'plugins.markdown',
+  require "plugins.quicker",
 
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
