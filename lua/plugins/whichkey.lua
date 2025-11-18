@@ -52,6 +52,8 @@ return { -- Useful plugin to show you pending keybinds.
       { "<leader>g", group = "Git" },
       { "<leader>c", group = "Code" },
       { "<leader>u", group = "UI/Toggles" },
+      { "<leader>n", group = "Next", icon = "" },
+      { "<leader>p", group = "Previous", icon = "" },
     },
   },
 }

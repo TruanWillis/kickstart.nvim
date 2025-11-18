@@ -47,6 +47,8 @@ return {
     })
   end,
   keys = {
+    { "<leader><leader>", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     -- File
     { "<leader>fe", function() Snacks.explorer() end, desc = "File Explorer [Snacks]" },
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
@@ -71,6 +73,7 @@ return {
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>sn", function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+    { "<leader>sq", vim.diagnostic.setloclist, desc = "Diagnostic quickfix list" },
     {
       "<leader>sr",
       function()
@@ -81,7 +84,7 @@ return {
           false
         )
       end,
-      desc = "Substitute (find/replace) word under cursor with confirmation",
+      desc = "Replace word under cursor (confirm)",
     },
 
     -- Git
