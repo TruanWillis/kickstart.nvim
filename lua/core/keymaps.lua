@@ -42,7 +42,7 @@ map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
 -- map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
 -- map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous Buffer' })
-map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete Buffer' })
+-- map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete Buffer' })
 
 -- Essential missing mappings
 -- map('n', '<leader>w', '<cmd>w<cr>', { desc = 'Save File' })
@@ -52,13 +52,3 @@ map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete Buffer' })
 -- better indenting
 map('v', '<', '<gv')
 map('v', '>', '>gv')
-
--- Substitute (find/replace) word under cursor with confirmation
-map('n', '<leader>sr', function()
-  local word = vim.fn.expand('<cword>')
-  vim.api.nvim_feedkeys(
-    ':' .. '%s/\\<' .. word .. '\\>//gc' .. vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true),
-    'n',
-    false
-  )
-end, { desc = 'Substitute (find/replace) word under cursor with confirmation' })

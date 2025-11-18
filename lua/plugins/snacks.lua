@@ -47,40 +47,62 @@ return {
     })
   end,
   keys = {
-    { "<leader>uz", function() Snacks.zen() end, desc = "Toggle Zen Mode" }, -- Zen mode keymap
-    -- Files & Buffers
-    { "<leader><leader>", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    -- File
     { "<leader>fe", function() Snacks.explorer() end, desc = "File Explorer [Snacks]" },
-    { "<leader>ff",       function() Snacks.picker.files() end, desc = "Find Files" },
-    { "<leader>fc",       function() Snacks.picker.files { cwd = vim.fn.stdpath("config") } end, desc = "Find Config File" },
-    { "<leader>fr",       function() Snacks.picker.recent() end, desc = "Recent Files" },
+    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>fc", function() Snacks.picker.files { cwd = vim.fn.stdpath("config") } end, desc = "Find Config File" },
+    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent Files" },
 
-    -- Git
-    -- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
-    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
-    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff" },
-    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+    -- Buffer
+    { "<leader>bb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>bd", function() vim.cmd("bdelete") end, desc = "Delete Buffer" },
+    { "<leader>bn", function() vim.cmd("bnext") end, desc = "Next Buffer" },
+    { "<leader>bp", function() vim.cmd("bprevious") end, desc = "Previous Buffer" },
 
     -- Search
-    { "<leader>/",  function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sp", function() Snacks.picker.grep() end, desc = "Grep Project" },
     { "<leader>sb", function() Snacks.picker.grep_buffers() end, desc = "Grep Buffers" },
     { "<leader>sw", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "Grep Word" },
     { "<leader>so", function() Snacks.picker.lsp_symbols() end, desc = "Buffer Symbols" },
     { "<leader>sO", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Workspace Symbols" },
-
-    -- Diagnostics & Misc
     { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>sn", function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+    {
+      "<leader>sr",
+      function()
+        local word = vim.fn.expand("<cword>")
+        vim.api.nvim_feedkeys(
+          ":" .. "%s/\\<" .. word .. "\\>//gc" .. vim.api.nvim_replace_termcodes("<Left><Left><Left>", true, false, true),
+          "n",
+          false
+        )
+      end,
+      desc = "Substitute (find/replace) word under cursor with confirmation",
+    },
 
-    -- Scratch
-    { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+    -- Git
+    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff" },
+    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+
+    -- Code
+    {
+      "<leader>cf",
+      function()
+        require("conform").format { async = true, lsp_format = "fallback" }
+      end,
+      desc = "Format buffer",
+    },
+    { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
+
+    -- UI/Toggles
+    { "<leader>uz", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+    { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
   },
 }
 
