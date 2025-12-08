@@ -8,7 +8,36 @@ return {
     dashboard = { enabled = false },
     explorer = { enabled = false },
     indent = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      mappings = {
+        ["<C-l>"] = function(picker)
+          local items = picker:get_items()
+          if not items or #items == 0 then
+            return
+          end
+
+          local loclist = {}
+          for _, item in ipairs(items) do
+            if item.filename and item.lnum then
+              table.insert(loclist, {
+                filename = item.filename,
+                lnum = item.lnum,
+                col = item.col,
+                text = item.text,
+              })
+            end
+          end
+
+          if #loclist > 0 then
+            vim.fn.setloclist(0, {}, "r")
+            vim.fn.setloclist(0, loclist, "a")
+            vim.cmd("lopen")
+            picker:close()
+          end
+        end,
+      },
+    },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = false },
