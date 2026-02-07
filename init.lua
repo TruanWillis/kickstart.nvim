@@ -87,6 +87,7 @@ require('lazy').setup({
   require 'plugins.flash',
   require 'plugins.markdown',
   require "plugins.quicker",
+  require "plugins.visual-multi"
 
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
