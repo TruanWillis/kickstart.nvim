@@ -123,13 +123,6 @@ return {
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
 
     -- Code
-    {
-      "<leader>cf",
-      function()
-        require("conform").format { async = true, lsp_format = "fallback" }
-      end,
-      desc = "Format buffer",
-    },
     { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
 
     -- UI/Toggles
