@@ -100,6 +100,16 @@ return {
     { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    {
+      "<leader>sc",
+      function()
+        -- Open the config reference and drop straight into a line search.
+        -- stdpath means this works from any directory, not just the config.
+        vim.cmd.edit(vim.fn.fnameescape(vim.fs.joinpath(vim.fn.stdpath("config"), "README.md")))
+        Snacks.picker.lines()
+      end,
+      desc = "Search config reference",
+    },
     { "<leader>sn", function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
     { "<leader>sq", vim.diagnostic.setloclist, desc = "Diagnostic quickfix list" },

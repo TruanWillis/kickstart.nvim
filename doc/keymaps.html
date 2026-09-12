@@ -1,0 +1,523 @@
+<title>Kickstart Keymap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+  /* Catppuccin Latte — the light half of this config's colourscheme */
+  :root {
+    --base:      #eff1f5;
+    --mantle:    #e6e9ef;
+    --crust:     #dce0e8;
+    --surface:   #ccd0da;
+    --text:      #4c4f69;
+    --subtext:   #5c5f77;
+    --muted:     #7c7f93;
+    --accent:    #8839ef;  /* mauve */
+    --accent-dim:#8839ef1f;
+    --builtin:   #179299;  /* teal  */
+    --plugin:    #1e66f5;  /* blue  */
+    --mine:      #8839ef;  /* mauve */
+    --warn:      #fe640b;  /* peach */
+    --warn-bg:   #fe640b14;
+    --shadow:    0 1px 2px #4c4f6914;
+    --ring:      #8839ef;
+  }
+  /* Catppuccin Mocha — dark, for the un-stamped system default */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --base:      #1e1e2e;
+      --mantle:    #181825;
+      --crust:     #11111b;
+      --surface:   #313244;
+      --text:      #cdd6f4;
+      --subtext:   #bac2de;
+      --muted:     #9399b2;
+      --accent:    #cba6f7;
+      --accent-dim:#cba6f726;
+      --builtin:   #94e2d5;
+      --plugin:    #89b4fa;
+      --mine:      #cba6f7;
+      --warn:      #fab387;
+      --warn-bg:   #fab3871a;
+      --shadow:    0 1px 2px #00000040;
+      --ring:      #cba6f7;
+    }
+  }
+  /* explicit dark choice wins over a light OS */
+  :root[data-theme="dark"] {
+    --base:      #1e1e2e;
+    --mantle:    #181825;
+    --crust:     #11111b;
+    --surface:   #313244;
+    --text:      #cdd6f4;
+    --subtext:   #bac2de;
+    --muted:     #9399b2;
+    --accent:    #cba6f7;
+    --accent-dim:#cba6f726;
+    --builtin:   #94e2d5;
+    --plugin:    #89b4fa;
+    --mine:      #cba6f7;
+    --warn:      #fab387;
+    --warn-bg:   #fab3871a;
+    --shadow:    0 1px 2px #00000040;
+    --ring:      #cba6f7;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--base);
+    color: var(--text);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+    padding-inline: 20px;
+    padding-block: 0 64px;
+  }
+  .wrap { max-width: 1080px; margin-inline: auto; }
+
+  /* ── masthead ─────────────────────────────────────────── */
+  header { padding-block: 48px 28px; }
+  h1 {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .lede {
+    color: var(--subtext);
+    max-width: 62ch;
+    margin: 0 0 20px;
+    font-size: 1.03rem;
+  }
+  .facts {
+    display: flex; flex-wrap: wrap; gap: 8px 10px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .78rem;
+    color: var(--muted);
+  }
+  .facts span {
+    background: var(--mantle);
+    border: 1px solid var(--crust);
+    border-radius: 4px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .facts b { color: var(--text); font-weight: 500; }
+
+  /* ── filter bar ───────────────────────────────────────── */
+  .bar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--base) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-block: 1px solid var(--crust);
+    padding-block: 12px;
+    margin-bottom: 28px;
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  }
+  #q {
+    flex: 1 1 240px;
+    min-width: 0;
+    font: 500 .9rem/1.4 "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--text);
+    background: var(--mantle);
+    border: 1px solid var(--surface);
+    border-radius: 6px;
+    padding: 9px 12px;
+  }
+  #q::placeholder { color: var(--muted); font-weight: 400; }
+  #q:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; border-color: transparent; }
+
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    font: 500 .78rem/1 "IBM Plex Sans", sans-serif;
+    letter-spacing: .01em;
+    color: var(--subtext);
+    background: var(--mantle);
+    border: 1px solid var(--surface);
+    border-radius: 999px;
+    padding: 7px 13px;
+    cursor: pointer;
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .chip:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .count { font-family: "IBM Plex Mono", monospace; font-size: .78rem; color: var(--muted); margin-left: auto; }
+
+  /* ── groups ───────────────────────────────────────────── */
+  h2 {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.22rem; font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 34px 0 4px;
+    scroll-margin-top: 80px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  .note { color: var(--muted); font-size: .88rem; margin: 0 0 14px; max-width: 68ch; }
+
+  ul.rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px;
+            background: var(--crust); border: 1px solid var(--crust); border-radius: 8px; overflow: hidden; }
+  li.row {
+    display: grid;
+    grid-template-columns: minmax(120px, 190px) 1fr auto;
+    gap: 14px; align-items: baseline;
+    background: var(--base);
+    padding: 9px 14px;
+  }
+  li.row:hover { background: var(--mantle); }
+
+  kbd {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .82rem; font-weight: 500;
+    color: var(--text);
+    background: var(--mantle);
+    border: 1px solid var(--surface);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    padding: 2px 7px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .keys { display: flex; flex-wrap: wrap; gap: 5px; }
+  .desc { color: var(--subtext); font-size: .93rem; }
+  .desc em { color: var(--text); font-style: normal; font-weight: 500; }
+
+  .src {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .68rem; letter-spacing: .04em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+    border: 1px solid currentColor;
+  }
+  .src.builtin { color: var(--builtin); }
+  .src.plugin  { color: var(--plugin); }
+  .src.mine    { color: var(--mine); }
+
+  /* ── callouts ─────────────────────────────────────────── */
+  .warn {
+    border-left: 3px solid var(--warn);
+    background: var(--warn-bg);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 14px 0;
+    font-size: .92rem;
+    color: var(--subtext);
+    max-width: 74ch;
+  }
+  .warn b { color: var(--text); }
+  code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .86em;
+    background: var(--mantle);
+    border: 1px solid var(--crust);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+  .empty { color: var(--muted); padding: 28px 0; font-size: .95rem; }
+  footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--crust);
+           color: var(--muted); font-size: .85rem; }
+  footer a { color: var(--accent); }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; font-size: .82rem; }
+
+  @media (max-width: 560px) {
+    li.row { grid-template-columns: 1fr; gap: 5px; }
+    li.row .src { justify-self: start; }
+    .count { margin-left: 0; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Kickstart Keymap</h1>
+    <p class="lede">
+      Every binding in <code>~/.config/kickstart</code>, separated by where it comes
+      from — Neovim itself, this config, or a plugin. Dumped from a running session,
+      so it reflects what actually resolves rather than what the source files ask for.
+    </p>
+    <div class="facts">
+      <span>leader <b>&lt;Space&gt;</b></span>
+      <span>Neovim <b>0.11.4</b></span>
+      <span><b>27</b> plugins</span>
+      <span>launch <b>nvim-kick</b></span>
+      <span>LSP <b>lua · python only</b></span>
+    </div>
+  </header>
+
+  <div class="bar">
+    <input id="q" type="search" placeholder="Filter — try 'buffer', 'git', 'surround', or &lt;leader&gt;s" autocomplete="off">
+    <div class="chips" id="chips">
+      <button class="chip" id="f-all"     aria-pressed="true">All</button>
+      <button class="chip" id="f-builtin" aria-pressed="false">Neovim built-in</button>
+      <button class="chip" id="f-mine"    aria-pressed="false">My config</button>
+      <button class="chip" id="f-plugin"  aria-pressed="false">Plugin</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div id="out"></div>
+
+  <section id="gotchas">
+    <h2>Collisions worth remembering</h2>
+    <p class="note">
+      Where two plugins want the same key, the one that registers last wins — and in
+      a few places that quietly shadows something you'd expect to work.
+    </p>
+
+    <div class="warn">
+      <b>treesitter takes over three built-in bracket motions.</b>
+      <code>]l</code>/<code>[l</code> (location list), <code>]a</code>/<code>[a</code>
+      (arglist) and <code>]s</code>/<code>[s</code> (misspelled words) now move between
+      loops, parameters and scopes. Use <code>:lnext</code> / <code>:lprev</code> and
+      <code>:next</code> / <code>:prev</code> instead. Losing <code>]s</code> matters
+      most — with spell check on, that was how you jumped between misspellings, and
+      toggling spell won't bring it back.
+    </div>
+
+    <div class="warn">
+      <b><code>al</code> / <code>il</code> mean loop, not mini.ai's "last".</b>
+      mini.ai's own docs say <code>al</code>, but treesitter wins in any buffer with a
+      parser — so the "last" variants were remapped to <code>aL</code> / <code>iL</code>
+      in <code>lua/plugins/mini.lua</code>. <code>an</code> / <code>in</code> are
+      untouched.
+    </div>
+
+    <div class="warn">
+      <b>Go-to-definition is <code>&lt;C-]&gt;</code>, not <code>gd</code>.</b>
+      <code>gd</code> isn't mapped at all. <code>&lt;C-]&gt;</code> is Vim's native tag
+      jump, which reaches the language server because Neovim sets <code>tagfunc</code>.
+      <code>&lt;C-t&gt;</code> jumps back.
+    </div>
+
+    <div class="warn">
+      <b>LSP only starts for Lua and Python.</b>
+      <code>nvim-lspconfig</code> is <code>ft</code>-limited. A Go or JavaScript file
+      gets treesitter highlighting but no diagnostics, completion or hover. To add one,
+      the server goes in <em>both</em> <code>mason-tool-installer</code>'s list (mason
+      package name, e.g. <code>lua-language-server</code>) and
+      <code>vim.lsp.enable</code> (lspconfig name, e.g. <code>lua_ls</code>).
+    </div>
+  </section>
+
+  <footer>
+    <div class="legend">
+      <span class="src builtin">built-in</span>
+      <span class="src mine">my config</span>
+      <span class="src plugin">plugin</span>
+    </div>
+    <p>
+      <code>&lt;leader&gt;sk</code> opens the live keymap picker inside Neovim — the
+      authoritative version of this page. <code>:checkhealth which-key</code> reports
+      overlaps and duplicates.
+    </p>
+  </footer>
+</div>
+
+<script>
+const B = [
+["Getting around the config","",[
+  ["<leader>sk","Keymap picker — <em>the one to remember when you forget the rest</em>","plugin"],
+  ["<leader>sh","Help pages","plugin"],
+  ["<leader>fc","Find a file in the config directory","plugin"],
+  [":checkhealth","Diagnose config and plugin problems","builtin"],
+  [":Inspect","Highlight groups + treesitter captures under the cursor","builtin"],
+  [":InspectTree","Live treesitter syntax tree","builtin"],
+  [":Tutor","The built-in interactive tutorial","builtin"],
+]],
+["Files and buffers","",[
+  ["<leader><leader>","Buffer switcher","plugin"],
+  ["<leader>ff","Find files","plugin"],
+  ["<leader>fr","Recent files","plugin"],
+  ["<leader>fe","File explorer","plugin"],
+  ["<leader>bb","Buffer list","plugin"],
+  ["<leader>bd","Delete buffer","plugin"],
+  ["<leader>bn|<leader>bp","Next / previous buffer","plugin"],
+  ["]b|[b","Next / previous buffer","mine"],
+  ["<leader>/","Fuzzy-search lines in this buffer","plugin"],
+]],
+["Search and pickers","All backed by snacks.picker. Inside a picker, <code>&lt;C-l&gt;</code> sends every result to the location list.",[
+  ["<leader>sp","Grep the project","plugin"],
+  ["<leader>sb","Grep open buffers","plugin"],
+  ["<leader>sw","Grep the word under the cursor (also visual)","plugin"],
+  ["<leader>sr","Replace word under cursor, with confirmation","plugin"],
+  ["<leader>so","Document symbols","plugin"],
+  ["<leader>sO","Workspace symbols","plugin"],
+  ["<leader>sd","All diagnostics","plugin"],
+  ["<leader>sD","Buffer diagnostics","plugin"],
+  ["<leader>sq","Diagnostics to the location list","plugin"],
+  ["<leader>sn","Notification history","plugin"],
+  ["<leader>su","Undo history","plugin"],
+]],
+["LSP","Neovim 0.11 ships these — no plugin, no config. It's why this setup has no LspAttach keymap block.",[
+  ["K","Hover documentation","builtin"],
+  ["grn","Rename","builtin"],
+  ["gra","Code action","builtin"],
+  ["grr","References","builtin"],
+  ["gri","Implementation","builtin"],
+  ["grt","Type definition","builtin"],
+  ["gO","Document symbols","builtin"],
+  ["<C-s>","Signature help <em>(insert mode)</em>","builtin"],
+  ["<C-]>","Go to definition — native tag jump via <code>tagfunc</code>","builtin"],
+  ["<C-t>","Jump back from a definition","builtin"],
+  ["]d|[d","Next / previous diagnostic","builtin"],
+  ["]D|[D","Last / first diagnostic in the buffer","builtin"],
+  ["<leader>cr","Rename symbol","plugin"],
+]],
+["Code and formatting","Formatting is manual — saving does not reformat.",[
+  ["<leader>cf","Format buffer (stylua · isort + black)","plugin"],
+  ["gcc","Toggle comment on this line","builtin"],
+  ["gc","Toggle comment over a motion, e.g. <code>gcap</code>","builtin"],
+  ["gc","Toggle comment on the selection <em>(visual)</em>","builtin"],
+]],
+["Completion","blink.cmp. Snippets expand through Neovim's own <code>vim.snippet</code> — there's no snippet engine plugin.",[
+  ["<C-y>","Accept the completion","plugin"],
+  ["<C-n>|<C-p>","Next / previous item","plugin"],
+  ["<C-space>","Open the menu, or show docs if open","plugin"],
+  ["<C-e>","Dismiss","plugin"],
+  ["<C-k>","Toggle signature help","plugin"],
+  ["<Tab>|<S-Tab>","Move between snippet placeholders","plugin"],
+]],
+["Git","Gutter signs from gitsigns: <code>+</code> add, <code>~</code> change, <code>_</code> delete. Hunk staging isn't mapped.",[
+  ["<leader>gl","Git log","plugin"],
+  ["<leader>gL","Git log for this line","plugin"],
+  ["<leader>gf","Git log for this file","plugin"],
+  ["<leader>gd","Git diff","plugin"],
+]],
+["Motion — flash.nvim","Flash owns <code>s</code>, which is why surround moved to the <code>ys</code> prefix.",[
+  ["s","Jump to any visible location by label","plugin"],
+  ["S","Jump to a treesitter node","plugin"],
+  ["r","Remote flash — operator-pending, e.g. <code>yr</code> then a label","plugin"],
+  ["R","Treesitter search (operator / visual)","plugin"],
+  ["<C-s>","Toggle flash while searching with <code>/</code>","plugin"],
+]],
+["Text objects","Usable after any operator — <code>d</code>, <code>c</code>, <code>y</code>, <code>v</code>. So <code>daf</code> deletes a function, <code>cif</code> changes its body.",[
+  ["af|if","Function, outer / inner","plugin"],
+  ["ac|ic","Class, outer / inner","plugin"],
+  ["aa|ia","Parameter or argument","plugin"],
+  ["ab|ib","Block","plugin"],
+  ["al|il","Loop","plugin"],
+  ["ai|ii","Conditional","plugin"],
+  ["an|in","mini.ai — the <em>next</em> one, e.g. <code>dan)</code>","plugin"],
+  ["aL|iL","mini.ai — the <em>previous</em> one, e.g. <code>daL)</code>","plugin"],
+  ["aq|iq","Any quote","plugin"],
+  ["a?|i?","Prompt for arbitrary delimiters","plugin"],
+  ["g[|g]","Jump to the edges of a text object","plugin"],
+  ["iw|aw","Word, inner / with surrounding space","builtin"],
+  ["ip|ap","Paragraph","builtin"],
+  ["is|as","Sentence","builtin"],
+  ["i(|i{|i[","Inside a bracket pair — <code>a</code> to include it","builtin"],
+  ['i"|i\'',"Inside quotes","builtin"],
+  ["it|at","Inside / around an HTML-ish tag","builtin"],
+]],
+["Moving between things","",[
+  ["]f|[f","Next / previous function start","plugin"],
+  ["]F|[F","Next / previous function end","plugin"],
+  ["]c|[c","Next / previous class start","plugin"],
+  ["]C|[C","Next / previous class end","plugin"],
+  ["]l|[l","Next / previous loop start","plugin"],
+  ["]L|[L","Next / previous loop end","plugin"],
+  ["]a|[a","Next / previous parameter","plugin"],
+  ["]i|[i","Next / previous conditional","plugin"],
+  ["]s|[s","Next / previous scope","plugin"],
+  ["]]|[[","Next / previous reference to the symbol under the cursor","plugin"],
+  ["]q|[q","Next / previous quickfix entry","builtin"],
+  ["]Q|[Q","Last / first quickfix entry","builtin"],
+  ["<leader>na|<leader>pa","Swap parameter with the next / previous","plugin"],
+  ["<leader>nf|<leader>pf","Swap function with the next / previous","plugin"],
+]],
+["Surround — mini.surround","Add <code>n</code> or <code>l</code> for the next / previous match: <code>ysdn</code> deletes the next surrounding. Example: <code>ysa</code> + <code>iw</code> + <code>)</code> wraps a word in parens; <code>ysr</code> + <code>)</code> + <code>'</code> turns parens into quotes.",[
+  ["ysa","Add surrounding (also visual)","plugin"],
+  ["ysd","Delete surrounding","plugin"],
+  ["ysr","Replace surrounding","plugin"],
+  ["ysf|ysF","Find surrounding, right / left","plugin"],
+  ["ysh","Highlight surrounding","plugin"],
+]],
+["UI toggles","",[
+  ["<leader>us","Spelling","plugin"],
+  ["<leader>uw","Wrap","plugin"],
+  ["<leader>ul|<leader>uL","Line numbers / relative numbers","plugin"],
+  ["<leader>ud","Diagnostics","plugin"],
+  ["<leader>uc","Conceal level","plugin"],
+  ["<leader>uT","Treesitter highlight","plugin"],
+  ["<leader>ub","Dark background","plugin"],
+  ["<leader>uh","Inlay hints","plugin"],
+  ["<leader>ug","Indent guides","plugin"],
+  ["<leader>uD","Dimming","plugin"],
+  ["<leader>uz","Zen mode","plugin"],
+  ["<leader>.","Scratch buffer","plugin"],
+]],
+["Quickfix and location list","",[
+  ["<leader>q","Toggle quickfix","plugin"],
+  ["<leader>l","Toggle location list","plugin"],
+  [">|<","In a quickfix window: expand / collapse context","plugin"],
+]],
+["Windows, tmux and multi-cursor","<code>&lt;C-hjkl&gt;</code> crosses the Neovim/tmux boundary, so the same keys move between splits and panes.",[
+  ["<C-h>|<C-j>|<C-k>|<C-l>","Move between splits and tmux panes","plugin"],
+  ["<C-\\>","Jump to the previous split or pane","plugin"],
+  ["<C-n>","Select word under cursor, then add the next occurrence","plugin"],
+  ["\\\\A","Select every occurrence","plugin"],
+  ["\\\\/","Start a regex search for cursors","plugin"],
+]],
+["Odds and ends","",[
+  ["<Esc>","Clear search highlight","mine"],
+  ["<Esc><Esc>","Leave terminal mode","mine"],
+  ["<|>","Indent in visual mode, keeping the selection","mine"],
+  ["←|↓|↑|→","Deliberately disabled in normal mode — use <code>hjkl</code>","mine"],
+  ["gx","Open the URL or filepath under the cursor","builtin"],
+]],
+];
+
+const LABEL = { builtin: "built-in", mine: "my config", plugin: "plugin" };
+const out = document.getElementById("out");
+const q = document.getElementById("q");
+const countEl = document.getElementById("count");
+let src = "all";
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function render() {
+  const term = q.value.trim().toLowerCase();
+  let shown = 0, html = "";
+  for (const [group, note, rows] of B) {
+    const keep = rows.filter(([k, d, s]) => {
+      if (src !== "all" && s !== src) return false;
+      if (!term) return true;
+      const plain = d.replace(/<[^>]+>/g, "");
+      return (k + " " + plain + " " + group).toLowerCase().includes(term);
+    });
+    if (!keep.length) continue;
+    shown += keep.length;
+    html += `<h2>${group}</h2>`;
+    if (note && !term && src === "all") html += `<p class="note">${note}</p>`;
+    html += `<ul class="rows">`;
+    for (const [k, d, s] of keep) {
+      const chips = k.split("|").map(x => `<kbd>${esc(x)}</kbd>`).join("");
+      html += `<li class="row"><span class="keys">${chips}</span>` +
+              `<span class="desc">${d}</span>` +
+              `<span class="src ${s}">${LABEL[s]}</span></li>`;
+    }
+    html += `</ul>`;
+  }
+  out.innerHTML = html || `<p class="empty">No binding matches “${esc(q.value)}”.</p>`;
+  const total = B.reduce((n, g) => n + g[2].length, 0);
+  countEl.textContent = shown === total ? `${total} bindings` : `${shown} of ${total}`;
+  document.getElementById("gotchas").hidden = !!term;
+}
+
+q.addEventListener("input", render);
+document.getElementById("chips").addEventListener("click", e => {
+  const btn = e.target.closest(".chip");
+  if (!btn) return;
+  src = btn.id.replace("f-", "");
+  for (const c of document.querySelectorAll(".chip"))
+    c.setAttribute("aria-pressed", String(c === btn));
+  render();
+});
+render();
+</script>

@@ -25,7 +25,14 @@ lua/core/keymaps.lua      non-plugin keymaps
 lua/core/autocmds.lua     autocommands
 lua/plugins/*.lua         one file per plugin
 after/lsp/<server>.lua    per-server LSP overrides (merged by Neovim)
+doc/keymaps.html          this reference as a filterable page, for a browser
 ```
+
+`<leader>sc` opens this file in Neovim and drops straight into a line search.
+`doc/keymaps.html` is the same material as a standalone page with live
+filtering and built-in/plugin badges — open it in a browser, or view the
+published copy. **The two are maintained separately, so edits here need
+mirroring there.**
 
 Leader is **space**. Local leader is also space.
 
@@ -78,6 +85,7 @@ All backed by snacks.picker.
 | `<leader>sq` | Diagnostics to the location list |
 | `<leader>sh` | Help pages |
 | `<leader>sk` | Keymaps — **use this when you forget a binding** |
+| `<leader>sc` | Open this file and search it (works from any directory) |
 | `<leader>sn` | Notification history |
 | `<leader>su` | Undo history |
 
