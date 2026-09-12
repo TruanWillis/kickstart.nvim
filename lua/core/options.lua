@@ -81,3 +81,13 @@ vim.opt.scrolloff = 999
 vim.opt.colorcolumn = "88"
 
 vim.opt.winborder = "rounded"
+
+-- Disable unused language providers. Neovim probes for a Python 3 host on
+-- every Python buffer; with a pyenv shim on PATH and no `pynvim` installed
+-- that probe costs ~2.2s per file. Nothing here is a remote plugin -- pyright
+-- speaks LSP over stdio and black/isort are subprocesses run by conform.
+-- Re-enable a provider (and `:checkhealth provider`) if you ever add one.
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
