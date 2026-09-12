@@ -1,0 +1,34 @@
+
+### icon providers loaded
+  mini.icons           -
+  nvim-web-devicons    LOADED
+  mini.icons mocking devicons: false
+
+### notification systems
+  notify               -
+  noice                LOADED
+  snacks.notifier enabled: true
+  vim.notify is: function: 0x7f07168a6790
+
+### who owns each textobject key (operator-pending)
+  af   Select textobject @function.outer
+  if   Select textobject @function.inner
+  ac   (none)
+  ic   (none)
+  aa   Select textobject @parameter.outer
+  ia   Select textobject @parameter.inner
+  ab   Select textobject @block.outer
+  ib   Select textobject @block.inner
+  al   Select textobject @loop.outer
+  il   Select textobject @loop.inner
+  an   Around next textobject
+  in   Inside next textobject
+
+### commenting
+  gc   Toggle comment
+  gcc  Toggle comment line
+  mini.comment loaded: false
+
+### reference highlighting
+  vim-illuminate loaded: true
+  snacks.words enabled : false

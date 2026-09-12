@@ -20,7 +20,8 @@ return { -- Autocompletion
       -- Press <c-space> to show documentation.
       documentation = { auto_show = false, auto_show_delay_ms = 500 },
       menu = {
-        border = 'rounded',
+        -- No `border` here: vim.o.winborder ('rounded', set in
+        -- lua/core/options.lua) applies to floats that don't specify one.
         scrollbar = true,
         max_height = 6,
         draw = {

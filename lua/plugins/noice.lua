@@ -1,40 +1,23 @@
 return {
   'folke/noice.nvim',
   event = 'VeryLazy',
+  -- nvim-notify is deliberately absent: noice falls back to snacks.notifier,
+  -- which this config already enables.
+  dependencies = { 'MunifTanjim/nui.nvim' },
+  -- Single opts table: lazy calls require('noice').setup(opts) for us. Splitting
+  -- this across `opts` and a `config` function meant `opts` was silently dropped.
   opts = {
-    -- add any options here
     lsp = {
-      signature = {
-        enabled = false,
-      },
+      -- blink.cmp provides signature help (see 'lua/plugins/autocomplete.lua');
+      -- leaving noice's enabled too gave two popups for the same thing.
+      signature = { enabled = false },
+    },
+    presets = {
+      bottom_search = true, -- classic bottom cmdline for search
+      command_palette = true, -- position the cmdline and popupmenu together
+      long_message_to_split = true, -- long messages go to a split
+      inc_rename = false, -- input dialog for inc-rename.nvim
+      lsp_doc_border = true, -- border on hover docs and signature help
     },
   },
-  dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-    'MunifTanjim/nui.nvim',
-    -- OPTIONAL:
-    --   `nvim-notify` is only needed, if you want to use the notification view.
-    --   If not available, we use `mini` as the fallback
-    'rcarriga/nvim-notify',
-  },
-  config = function()
-    require('noice').setup {
-      --     lsp = {
-      --       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-      --       override = {
-      --         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-      --         ['vim.lsp.util.stylize_markdown'] = true,
-      --         ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
-      --       },
-      --     },
-      --     -- you can enable a preset for easier configuration
-      presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
-      },
-    }
-  end,
 }
