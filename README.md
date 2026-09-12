@@ -169,10 +169,27 @@ Usable after any operator (`d`, `c`, `y`, `v`).
 | `ab` / `ib` | Block |
 | `al` / `il` | Loop |
 | `ai` / `ii` | Conditional |
-| `an` / `in` | mini.ai "next" variant, e.g. `an)` = around the next parens |
+
+### mini.ai next / last variants
+
+These take a second character naming the delimiter, and act on a *nearby*
+object without moving the cursor first:
+
+| Key | Acts on |
+|---|---|
+| `an` / `in` | The **next** one, e.g. `dan)` deletes the next parens |
+| `aL` / `iL` | The **previous** one, e.g. `daL)` deletes the previous parens |
+
+mini.ai also adds `aq`/`iq` (any quote) and `a?`/`i?` (prompt for arbitrary
+delimiters), and `g[` / `g]` jump to the edges of a text object.
+
+> `aL`/`iL` are non-standard. mini.ai's defaults are `al`/`il`, but
+> treesitter-textobjects claims those for loops and wins in any buffer with a
+> parser — so they were remapped in `lua/plugins/mini.lua` to work
+> consistently.
 
 So `daf` deletes a function, `cif` changes a function body, `via` selects an
-argument.
+argument, `daL)` deletes the parenthesised group before the cursor.
 
 ## Navigation between things
 
@@ -361,9 +378,10 @@ highlighting but no LSP. To add a language, add the server to
 **Per-server settings go in `after/lsp/<name>.lua`**, not in `lsp.lua`.
 Neovim merges them over nvim-lspconfig's defaults. See `after/lsp/lua_ls.lua`.
 
-**`al` / `il` mean loop, not mini.ai's "last".** treesitter-textobjects and
-mini.ai both claim these; treesitter wins. mini.ai's "next" variants (`an`,
-`in`) still work, its "last" variants do not.
+**`al` / `il` mean loop.** treesitter-textobjects and mini.ai both claim
+these and treesitter wins, so mini.ai's "last" variants were moved to
+`aL` / `iL` in `lua/plugins/mini.lua`. Worth knowing if you follow mini.ai's
+own documentation, which says `al`.
 
 **Spell check is on for every buffer.** Treesitter limits it to comments and
 strings, so identifiers aren't flagged. `<leader>us` toggles it.
