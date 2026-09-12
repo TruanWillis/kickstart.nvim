@@ -7,9 +7,6 @@ local map = vim.keymap.set
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
--- map('n', '<leader>sq', vim.diagnostic.setloclist, { desc = 'Diagnostic quickfix list' })
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -24,30 +21,14 @@ map('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 map('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
--- map('n', '<leader>wh', '<C-w>h', { desc = 'Move focus to the left window' })
--- map('n', '<leader>wj', '<C-w>j',{ desc = 'Move focus to the left window' })
--- map('n', '<leader>wk', '<C-w>k',{ desc = 'Move focus to the left window' })
--- map('n', '<leader>wl', '<C-w>l',{ desc = 'Move focus to the left window' })
+-- NOTE: <C-hjkl> window navigation is owned by vim-tmux-navigator (see
+-- 'lua/plugins/vim-tmux-navigator.lua') so that the same keys cross the
+-- Neovim/tmux boundary. Defining them here would be dead code: lazy.nvim
+-- registers its mappings after this file is required.
 
 -- buffers
 map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
--- map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
--- map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous Buffer' })
--- map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete Buffer' })
-
--- Essential missing mappings
--- map('n', '<leader>w', '<cmd>w<cr>', { desc = 'Save File' })
--- map('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit Window' })
--- map('n', '<leader>Q', '<cmd>q!<cr>', { desc = 'Force Quit' })
 
 -- better indenting
 map('v', '<', '<gv')
