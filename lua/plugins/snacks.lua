@@ -100,8 +100,9 @@ return {
     { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
     {
-      "<leader>sc",
+      "<leader>?",
       function()
         -- Open the config reference and drop straight into a line search.
         -- stdpath means this works from any directory, not just the config.

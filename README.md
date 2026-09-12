@@ -28,7 +28,7 @@ after/lsp/<server>.lua    per-server LSP overrides (merged by Neovim)
 doc/keymaps.html          this reference as a filterable page, for a browser
 ```
 
-`<leader>sc` opens this file in Neovim and drops straight into a line search.
+`<leader>?` opens this file in Neovim and drops straight into a line search.
 `doc/keymaps.html` is the same material as a standalone page with live
 filtering and built-in/plugin badges — open it in a browser, or view the
 published copy. **The two are maintained separately, so edits here need
@@ -85,7 +85,7 @@ All backed by snacks.picker.
 | `<leader>sq` | Diagnostics to the location list |
 | `<leader>sh` | Help pages |
 | `<leader>sk` | Keymaps — **use this when you forget a binding** |
-| `<leader>sc` | Open this file and search it (works from any directory) |
+| `<leader>sc` | Command history |
 | `<leader>sn` | Notification history |
 | `<leader>su` | Undo history |
 
@@ -264,6 +264,7 @@ for the full set — it has a large default mapping table.
 
 | Key | Action |
 |---|---|
+| `<leader>?` | Open this reference and search it (works from any directory) |
 | `<Esc>` | Clear search highlight |
 | `<Esc><Esc>` | Leave terminal mode |
 | `<` / `>` in visual | Indent, keeping the selection |
