@@ -48,28 +48,8 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+  -- See `:help lazy.nvim-plugin-spec` for the shape of a plugin entry.
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-
-  -- NOTE: Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
-  --
-  -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  --
-
-  -- Alternatively, use `config = function() ... end` for full control over the configuration.
-  -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
-  --
 
   require 'plugins.colorscheme',
   require 'plugins.whichkey',
@@ -86,14 +66,9 @@ require('lazy').setup({
   require 'plugins.gitsigns',
   require 'plugins.flash',
   require 'plugins.markdown',
-  require "plugins.quicker",
-  require "plugins.visual-multi",
-  require "plugins.illuminate"
-
-  -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
-  -- Or use telescope!
-  -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
-  -- you can continue same window with `<space>sr` which resumes last telescope search
+  require 'plugins.quicker',
+  require 'plugins.visual-multi',
+  require 'plugins.illuminate',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

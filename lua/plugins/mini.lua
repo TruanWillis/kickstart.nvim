@@ -3,18 +3,11 @@ return {
   version = '*', -- optional, locks to stable API
   event = { 'VeryLazy' }, -- defer loading until after UI startup
   config = function()
-    -- Better Around/Inside textobjects
-    --
-    -- Examples:
-    --  - va)  - [V]isually select [A]round [)]paren
-    --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-
+    -- Around/Inside textobjects, e.g. `va)`, `yinq`
     require('mini.ai').setup { n_lines = 500 }
-    -- Add/delete/replace surroundings (brackets, quotes, etc.)
-    --
-    -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-    -- - sd'   - [S]urround [D]elete [']quotes
-    -- - sr)'  - [S]urround [R]eplace [)] [']
+
+    -- Surround, remapped onto a `ys` prefix so that `s` stays free for
+    -- flash.nvim (see 'lua/plugins/flash.lua').
     require('mini.surround').setup {
       mappings = {
         add = 'ysa', -- Add surrounding in Normal and Visual modes
@@ -43,15 +36,6 @@ return {
       { "ysr", desc = "Replace surrounding" },
       { "ysn", desc = "Update n_lines" },
     })
-    -- don't init mini.files here (we’ll load it with keys below)
   end,
-
-  -- keys = {
-  --   {
-  --     '<leader>e',
-  --     function() require('mini.files').open() end,
-  --     desc = 'File Explorer [Mini]',
-  --   },
-  -- },
 }
 

@@ -1,8 +1,6 @@
+-- Multiple cursors. Set `vim.g.VM_*` variables in an `init` function here to
+-- customise; see `:help visual-multi`.
 return {
-  "mg979/vim-visual-multi",
-  event = "VeryLazy",
-  init = function()
-    -- Optional: Define configuration/variables here before the plugin loads
-    -- Example: vim.g.VM_leader = '\\'
-  end,
+  'mg979/vim-visual-multi',
+  event = 'VeryLazy',
 }
